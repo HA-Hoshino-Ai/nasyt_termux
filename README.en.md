@@ -17,13 +17,13 @@ You can use curl or wget to get files
 curl
 
 ```
-bash -c "$(curl -o .nasyt/naster https://gitee.com/HA-Hoshino-Ai/nasyt_termux/raw/master/nasyt_termux.sh)"
+bash -c "$(curl -o .nasyt/naster https://gitee.com/HA-Hoshino-Ai/nasyt_termux/raw/master/install.sh)"
 ```
 or wget
 
 
 ```
-bash -c "$(wget -qO- https://gitee.com/HA-Hoshino-Ai/nasyt_termux/raw/master/nasyt_termux.sh)"
+bash -c "$(wget -qO- https://gitee.com/HA-Hoshino-Ai/nasyt_termux/raw/master/install.sh)"
 ```
 
 Please enter the chmod command after downloading
