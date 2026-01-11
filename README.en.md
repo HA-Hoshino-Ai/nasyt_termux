@@ -17,7 +17,7 @@ You can use curl or wget to get files
 curl
 
 ```
-bash -c "$(curl -o .nasyt/naster https://gitee.com/HA-Hoshino-Ai/nasyt_termux/raw/master/install.sh)"
+bash -c "$(curl -L .nasyt/naster https://gitee.com/HA-Hoshino-Ai/nasyt_termux/raw/master/install.sh)"
 ```
 or wget
 
