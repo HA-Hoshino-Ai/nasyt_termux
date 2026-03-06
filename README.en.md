@@ -5,14 +5,7 @@ Naster is for the nasyt script Termux Version, fully compatible Termux!In additi
 
 ### How to use/install naster?
 ** 
-You can install it using the curl directive, and then use the `chomd +x .nasyt/*` > (Before that, download the nasyt script! ）
- **1. Install/Download nasyt Script** 
-You can install nasyt through the official nasyt installation file script
-
-```
-bash -c "$(curl -L https://raw.gitcode.com/nasyt/nasyt-linux-tool/raw/master/nasyt_install.sh)"
-```
- **2. Download naster script** 
+ **1. Download naster script** 
 You can use curl or wget to get files
 curl
 
