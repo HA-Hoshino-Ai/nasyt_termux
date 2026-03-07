@@ -6,7 +6,7 @@
 
 #🤓变量部分------------------
 time_date="2026/02/21"
-version="2.0.66"
+version="2.0.67"
 nasyt_dir="$HOME/.nasyt"
 source $nasyt_dir/naster_config.conf >/dev/null 2>&1 ;
 config="$HOME/.nasyt/naster_config.conf"
@@ -56,24 +56,28 @@ check_option(){
 auto_update(){
     $habit --title "启用自动更新" --yesno "是否启用自动更新？（启用后检查更新将会失效）" 0 0
     if [ $? -eq 0 ]; then
-        echo "auto_update = true" > "$config"
+        echo "auto_update = true" >> "$config"
+        auto_update="true"
         clear
         echo -e "$(info)请重启脚本！"
         exit 0
     else
-        echo "auto_update = false" > "$config"
+        auto_update="false"
+        echo "auto_update = false" >> "$config"
     fi
 }
 
 auto_update_pkg(){
     $habit --title "启用自动更新包" --yesno "是否启用自动更新包？" 0 0
     if [ $? -eq 0 ]; then
-        echo "auto_update_pkg = true" > "$config"
+        echo "auto_update_pkg = true" >> "$config"
+        auto_update_pkg="true"
         clear
         echo -e "$(info)请重启脚本！"
         exit 0
     else
-        echo "auto_update_pkg = false" > "$config"
+        auto_update_pkg="false"
+        echo "\nauto_update_pkg = false" >> "$config"
     fi
 }
 
@@ -2157,12 +2161,12 @@ index_main(){
                     script_setting
                     case $script_setting_xz in
                         1)
-                            habit_rechoice=$habit --title "触控方式" \
+                            habit_rechoice=$($habit --title "触控方式" \
                             --menu "当前触控方式为:$habit" 0 0 10 \
                             1 "dialog" \
                             2 "whiptail" \
                             0 "←返回" \
-                            3>&1 1>&2 2>&3)
+                            2>&1 1>/dev/tty)
                             case $habit_rechoice in
                             1)
                                 habit=dialog
@@ -2180,12 +2184,12 @@ index_main(){
                             esac
                             ;;
                         2)
-                            auto_update_rechoice=$habit --title "自动更新" \
-                            --menu "当前自动更新状态为:$auto_update" 0 0 10
+                            auto_update_rechoice=$($habit --title "自动更新" \
+                            --menu "当前自动更新状态为:$auto_update" 0 0 10 \
                             1 "开启" \
                             2 "关闭" \
                             0 "←返回" \
-                            3>&1 1>&2 2>&3)
+                            2>&1 1>/dev/tty)
                             case $auto_update_rechoice in
                             1)
                                 auto_update=true
@@ -2203,12 +2207,12 @@ index_main(){
                             esac
                             ;;
                         3)
-                            auto_update_pkg_rechoice=$habit --title "自动更新包" \
+                            auto_update_pkg_rechoice=$($habit --title "自动更新包" \
                             --menu "当前自动更新包状态为:$auto_update_pkg" 0 0 10 \
                             1 "开启" \
                             2 "关闭" \
                             0 "←返回" \
-                            3>&1 1>&2 2>&3)
+                            2>&1 1>/dev/tty)
                             case $auto_update_pkg_rechoice in
                             1)
                                 auto_update_pkg=true
@@ -2230,6 +2234,7 @@ index_main(){
                             ;;
                     esac
                 done
+                ;;
             0)
                 exit 0
                 ;;
